@@ -1,0 +1,21 @@
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="#SCRIPTNAME#.cs" company="Johannes Deml">
+//   Copyright (c) #YEAR# Johannes Deml. All rights reserved.
+// </copyright>
+// <author>
+//   Johannes Deml
+//   send@johannesdeml.com
+// </author>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Supyrb
+{
+	using UnityEngine;
+	using System.Collections;
+	
+	public class #SCRIPTNAME# : MonoBehaviour 
+	{
+		
+	}
+}
+

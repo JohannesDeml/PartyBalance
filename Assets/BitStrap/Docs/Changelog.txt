@@ -1,0 +1,55 @@
+# Changelog #
+
+### 1.6 ###
+
++ Fix WebPlayer not compile error.
+
+
+### 1.5 ###
+
++ BitStrap.Examples namespace: all examples are now inside of this namespace.
++ CircularBuffer: An insert optimized queue.
+* Lots of small improvements
+
+
+### 1.4 ###
+
++ PropertyDrawerHelper: Methods that help coding a PropertyDrawer editor.
++ ParticleSystemExtensions: Extensions to the UnityEngine.ParticleSystem class.
+* Timer: Added Progress property. 0.0 when the timer just started to 1.0 when the timer finished and stopped.
+* TimerDrawer: Enhanced the editor.
+* RectExtensions: Left() and Right() behaviours were swapped when "width" was negative. This is more intuitive.
+
+
+### 1.3 ###
+
++ StaticReflectionHelper: Bunch of static reflection helper methods.
++ ScriptDefinesHelper: Helper to work with scripting define symbols.
+
++ PlayerPrefsProperties: Makes it easy to work with PlayerPrefs treating them as properties.
++ EditorPrefsProperties: Makes it easy to work with EditorPrefs treating them as properties.
+
++ ScriptCreator: Create C# Script and C# Editor Script through the "Assets > Create" menu.
+
+
+### 1.2 ###
+
++ ScriptableObjectCreator: create ScriptableObject instances by right-clicking its scripts;
++ RectExtensions: helper extensions for non-layout editor codes;
++ ReadOnlyAttribute: put this on a field of your script. That field will appear as read only;
++ HelpBoxAttribute: put this on a field of your script. It will draw a EditorGUI.HelpBox above it;
++ ModifiableInt and ModifiableFloat: a specialized and serializable version of Modifiable<T>;
++ SerializedPropertyHelper: a method that returns the current property value. Used in NumberBoundsDrawer and ModifiableDrawer;
++ BackgroundBlurEditor: custom editor for BackgroundBlur.shader
+
+* ColorExtensions: is now ColorHelper;
+* ListExtensions: Added methods Count(), Any(), All() and ToStringFull();
+* DictionaryExtensions: Added methods Count(), Any(), All() and ToStringFull();
+* StringHelper: Get() is now Format();
+* Modifiable<T>: Changed to Math folder; and created a nice Inspector editor;
+
+
+### 1.1 ###
+
+First public version.
+You can follow this documentation link (https://docs.google.com/document/d/1LzsjBetzXnpR-nto8zqYLRxRvjW_DcPP_zOH-stSWVA/pub) for its contents.
