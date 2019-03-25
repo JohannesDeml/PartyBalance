@@ -1,4 +1,6 @@
-﻿// ----------------------------------------------------------------------------
+﻿// Upgrade NOTE: upgraded instancing buffer 'PerDrawSprite' to new syntax.
+
+// ----------------------------------------------------------------------------
 // <copyright file="SpriteWindAnimation.shader" company="Supyrb">
 //   Copyright (c) 2017 Supyrb. All rights reserved.
 // </copyright>
@@ -32,22 +34,22 @@ Shader "Sprites/WindAnimation"
 
 	#ifdef UNITY_INSTANCING_ENABLED
 
-		UNITY_INSTANCING_CBUFFER_START(PerDrawSprite)
-			// SpriteRenderer.Color while Non-Batched/Instanced.
-			fixed4 unity_SpriteRendererColorArray[UNITY_INSTANCED_ARRAY_SIZE];
-			// this could be smaller but that's how bit each entry is regardless of type
-			float4 unity_SpriteFlipArray[UNITY_INSTANCED_ARRAY_SIZE];
-		UNITY_INSTANCING_CBUFFER_END
+    UNITY_INSTANCING_BUFFER_START(PerDrawSprite)
+        // SpriteRenderer.Color while Non-Batched/Instanced.
+        UNITY_DEFINE_INSTANCED_PROP(fixed4, unity_SpriteRendererColorArray)
+        // this could be smaller but that's how bit each entry is regardless of type
+        UNITY_DEFINE_INSTANCED_PROP(fixed2, unity_SpriteFlipArray)
+    UNITY_INSTANCING_BUFFER_END(PerDrawSprite)
 
-		#define _RendererColor unity_SpriteRendererColorArray[unity_InstanceID]
-		#define _Flip unity_SpriteFlipArray[unity_InstanceID]
+    #define _RendererColor  UNITY_ACCESS_INSTANCED_PROP(PerDrawSprite, unity_SpriteRendererColorArray)
+    #define _Flip           UNITY_ACCESS_INSTANCED_PROP(PerDrawSprite, unity_SpriteFlipArray)
 
 	#endif // instancing
 
 	CBUFFER_START(UnityPerDrawSprite)
 	#ifndef UNITY_INSTANCING_ENABLED
 		fixed4 _RendererColor;
-		float4 _Flip;
+		fixed2 _Flip;
 	#endif
 		float _EnableExternalAlpha;
 	CBUFFER_END
@@ -73,18 +75,21 @@ Shader "Sprites/WindAnimation"
 		UNITY_VERTEX_OUTPUT_STEREO
 	};
 
+	inline float4 UnityFlipSprite(in float3 pos, in fixed2 flip)
+	{
+		return float4(pos.xy * flip, pos.z, 1.0);
+	}
+	
 	v2f vert(appdata_t IN)
 	{
 		v2f OUT;
 
 		UNITY_SETUP_INSTANCE_ID (IN);
 		UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
-
-		#ifdef UNITY_INSTANCING_ENABLED
-			IN.vertex.xy *= _Flip.xy;
-		#endif
-		IN.vertex.x += sin(_Time.w * _Frequency) * IN.vertex.y * _Amplitude;
-		OUT.vertex = UnityObjectToClipPos(IN.vertex);
+		
+		OUT.vertex = UnityFlipSprite(IN.vertex, _Flip);
+		OUT.vertex.x += sin(_Time.w * _Frequency) * IN.vertex.y * _Amplitude;
+		OUT.vertex = UnityObjectToClipPos(OUT.vertex);
 		OUT.texcoord = IN.texcoord;
 		OUT.color = IN.color * _Color * _RendererColor;
 

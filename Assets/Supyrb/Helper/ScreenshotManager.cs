@@ -63,7 +63,11 @@ namespace Supyrb
 			// Save the screenshot
 			string newFile = filePath + "Screenshot-" + DateTime.Now.ToString("yyyy-MM-dd--H-mm-ss") + ".png";
 			Debug.Log("Taking screenshot " + newFile, gameObject);
+			#if UNITY_2018_3_OR_NEWER
+			ScreenCapture.CaptureScreenshot(newFile, superSize);
+			#else
 			Application.CaptureScreenshot(newFile, superSize);
+			#endif
 		}
 #endif
 
