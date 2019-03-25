@@ -43,7 +43,7 @@ namespace Supyrb
 			get { return device; }
 		}
 
-		private AudioClip clipRecord = new AudioClip();
+		private AudioClip clipRecord = null;
 		private bool activeDevice;
 		private float[] tempWaveData;
 
