@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 50821558556604076}
+  bodyTransform: {fileID: 4354952038301298}
   anim: {fileID: 95930737667071712}
   animatorHorizontalSpeed:
     name: HorizontalSpeed

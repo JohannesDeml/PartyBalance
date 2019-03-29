@@ -109,6 +109,13 @@ namespace Supyrb
 			activeDevice = false;
 		}
 
+		void Update()
+		{
+			if (activeDevice)
+			{
+				UpdateMicrophoneInformation();
+			}
+		}
 
 		//get data from microphone into audioclip
 		private void UpdateMicrophoneInformation()
@@ -135,16 +142,6 @@ namespace Supyrb
 			}
 			maxVolume = max;
 			avgVolume = sum / sampleWindow;
-		}
-
-
-
-		void Update()
-		{
-			if (activeDevice)
-			{
-				UpdateMicrophoneInformation();
-			}
 		}
 
 		protected override void OnDestroy()

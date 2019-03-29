@@ -22,6 +22,9 @@ namespace Supyrb
 		private Rigidbody2D rigidBody;
 
 		[SerializeField]
+		private Transform bodyTransform = null;
+
+		[SerializeField]
 		private Animator anim;
 
 		[SerializeField]
@@ -49,12 +52,12 @@ namespace Supyrb
 		private float horizontalVelocity;
 		private Vector2 velocity = Vector2.zero;
 		private RaycastHit2D[] hits;
-		private Vector3 playerScale;
+		private Vector3 bodyScale;
 
 		void Awake()
 		{
 			hits = new RaycastHit2D[1];
-			playerScale = transform.localScale;
+			bodyScale = bodyTransform.localScale;
 			GlobalData.Instance.PointOfInterestPlayer = transform;
 		}
 
@@ -67,16 +70,16 @@ namespace Supyrb
 		{
 			var horizontalSpeed = rigidBody.velocity.x;
 			var absHorizontalSpeed = Math.Abs(horizontalSpeed);
-			playerScale = transform.localScale;
+			bodyScale = bodyTransform.localScale;
 			if (horizontalSpeed < 0f)
 			{
-				playerScale.x = -1f;
+				bodyScale.x = -1f;
 			}
 			else
 			{
-				playerScale.x = 1f;
+				bodyScale.x = 1f;
 			}
-			transform.localScale = playerScale;
+			bodyTransform.localScale = bodyScale;
 			anim.SetFloat(animatorHorizontalSpeed.Index, absHorizontalSpeed);
 			anim.SetFloat(animatorVerticalSpeed.Index, rigidBody.velocity.y);
 		}
