@@ -22,7 +22,7 @@ namespace BitStrap
 			if( GUILayout.Button( "Force Process Assemblies" ) )
 			{
 				AssemblyProcessorManager.LockAndProcessAssemblies();
-				InternalEditorUtility.RequestScriptReload();
+				EditorUtility.RequestScriptReload();
 
 				Debug.Log( "Assemblies Processed" );
 			}

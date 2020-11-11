@@ -18,7 +18,7 @@ namespace BitStrap
 			if( !wasReloadingScripts && AssemblyProcessorManager.LockAndProcessAssemblies() )
 			{
 				isReloading.Value = true;
-				InternalEditorUtility.RequestScriptReload();
+				EditorUtility.RequestScriptReload();
 			}
 		}
 	}
